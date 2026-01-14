@@ -1,0 +1,92 @@
+\begin{thebibliography}{14}
+\providecommand{\natexlab}[1]{#1}
+
+\bibitem[{Bhagavatula et~al.(2020)Bhagavatula, Le~Bras, Malaviya, Sakaguchi,
+  Holtzman, Rashkin, Downey, Yih, and Choi}]{bhagavatula2020abductive}
+Chandra Bhagavatula, Ronan Le~Bras, Chaitanya Malaviya, Keisuke Sakaguchi, Ari
+  Holtzman, Hannah Rashkin, Doug Downey, Wen-tau Yih, and Yejin Choi. 2020.
+\newblock Abductive commonsense reasoning.
+\newblock In \emph{International Conference on Learning Representations}.
+
+\bibitem[{Dettmers et~al.(2023)Dettmers, Pagnoni, Holtzman, and
+  Zettlemoyer}]{dettmers2023qlora}
+Tim Dettmers, Artidoro Pagnoni, Ari Holtzman, and Luke Zettlemoyer. 2023.
+\newblock Qlora: Efficient finetuning of quantized llms.
+\newblock \emph{Advances in Neural Information Processing Systems}, 36.
+
+\bibitem[{Devlin et~al.(2019)Devlin, Chang, Lee, and
+  Toutanova}]{devlin2019bert}
+Jacob Devlin, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova. 2019.
+\newblock Bert: Pre-training of deep bidirectional transformers for language
+  understanding.
+\newblock In \emph{Proceedings of NAACL-HLT}, pages 4171--4186.
+
+\bibitem[{Guu et~al.(2020)Guu, Lee, Tung, Pasupat, and Chang}]{guu2020realm}
+Kelvin Guu, Kenton Lee, Zora Tung, Panupong Pasupat, and Ming-Wei Chang. 2020.
+\newblock Realm: Retrieval-augmented language model pre-training.
+\newblock In \emph{International Conference on Machine Learning}, pages
+  3929--3938.
+
+\bibitem[{He et~al.(2021)He, Liu, Gao, and Chen}]{he2021deberta}
+Pengcheng He, Xiaodong Liu, Jianfeng Gao, and Weizhu Chen. 2021.
+\newblock Deberta: Decoding-enhanced bert with disentangled attention.
+\newblock \emph{International Conference on Learning Representations}.
+
+\bibitem[{Hu et~al.(2022)Hu, Shen, Wallis, Allen-Zhu, Li, Wang, Wang, and
+  Chen}]{hu2022lora}
+Edward~J Hu, Yelong Shen, Phillip Wallis, Zeyuan Allen-Zhu, Yuanzhi Li, Shean
+  Wang, Lu~Wang, and Weizhu Chen. 2022.
+\newblock Lora: Low-rank adaptation of large language models.
+\newblock \emph{International Conference on Learning Representations}.
+
+\bibitem[{Lewis et~al.(2020)Lewis, Perez, Piktus, Petroni, Karpukhin, Goyal,
+  K{\"u}ttler, Lewis, Yih, Rockt{\"a}schel et~al.}]{lewis2020rag}
+Patrick Lewis, Ethan Perez, Aleksandra Piktus, Fabio Petroni, Vladimir
+  Karpukhin, Naman Goyal, Heinrich K{\"u}ttler, Mike Lewis, Wen-tau Yih, Tim
+  Rockt{\"a}schel, and 1 others. 2020.
+\newblock Retrieval-augmented generation for knowledge-intensive nlp tasks.
+\newblock In \emph{Advances in Neural Information Processing Systems},
+  volume~33, pages 9459--9474.
+
+\bibitem[{Liu et~al.(2019)Liu, Ott, Goyal, Du, Joshi, Chen, Levy, Lewis,
+  Zettlemoyer, and Stoyanov}]{liu2019roberta}
+Yinhan Liu, Myle Ott, Naman Goyal, Jingfei Du, Mandar Joshi, Danqi Chen, Omer
+  Levy, Mike Lewis, Luke Zettlemoyer, and Veselin Stoyanov. 2019.
+\newblock Roberta: A robustly optimized bert pretraining approach.
+\newblock \emph{arXiv preprint arXiv:1907.11692}.
+
+\bibitem[{Peirce(1935)}]{peirce1935collected}
+Charles~Sanders Peirce. 1935.
+\newblock Collected papers of charles sanders peirce.
+
+\bibitem[{Rajpurkar et~al.(2016)Rajpurkar, Zhang, Lopyrev, and
+  Liang}]{rajpurkar2016squad}
+Pranav Rajpurkar, Jian Zhang, Konstantin Lopyrev, and Percy Liang. 2016.
+\newblock Squad: 100,000+ questions for machine comprehension of text.
+\newblock In \emph{Proceedings of EMNLP}, pages 2383--2392.
+
+\bibitem[{Reimers and Gurevych(2019)}]{reimers2019sentence}
+Nils Reimers and Iryna Gurevych. 2019.
+\newblock Sentence-bert: Sentence embeddings using siamese bert-networks.
+\newblock In \emph{Proceedings of EMNLP-IJCNLP}, pages 3982--3992.
+
+\bibitem[{Robertson and Zaragoza(2009)}]{robertson2009probabilistic}
+Stephen Robertson and Hugo Zaragoza. 2009.
+\newblock The probabilistic relevance framework: Bm25 and beyond.
+\newblock \emph{Foundations and Trends in Information Retrieval},
+  3(4):333--389.
+
+\bibitem[{Team(2024)}]{qwen2024}
+Qwen Team. 2024.
+\newblock Qwen2.5 technical report.
+\newblock \emph{arXiv preprint arXiv:2412.15115}.
+
+\bibitem[{Zhu et~al.(2023)Zhu, Shen, Mosbach, Stephan, and
+  Klakow}]{zhu2023weaker}
+Dawei Zhu, Xiaoyu Shen, Marius Mosbach, Andreas Stephan, and Dietrich Klakow.
+  2023.
+\newblock Weaker than you think: A critical look at weakly supervised learning.
+\newblock In \emph{Proceedings of the 61st Annual Meeting of the Association
+  for Computational Linguistics (Volume 1: Long Papers)}, pages 14229--14253.
+
+\end{thebibliography}

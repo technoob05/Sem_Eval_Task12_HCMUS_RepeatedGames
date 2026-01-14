@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+*.zip
+*_output/
+*.log
+semeval2026-task12-dataset/
