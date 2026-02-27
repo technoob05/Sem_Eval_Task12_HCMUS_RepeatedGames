@@ -58,9 +58,20 @@ Download the official dataset from the [AER Dataset Repository](https://github.c
 
 By default, the scripts expect the dataset to be structured according to the SemEval competition format. (Ensure to check `.gitignore` to avoid committing large datasets directly).
 
-### Running Experiments
+### Running the Winning Model (0.90 Score)
 
-To run a specific experiment, navigate to the `exp/` directory or run from the root:
+For reproducibility purposes, we have isolated our best-performing official submission (Extended LoRA on Qwen-32B + Hybrid Retrieval + Causal Graphing) into the **`best_submission/`** directory. 
+
+To easily reproduce our 5th-place matching score without navigating all experiments:
+```bash
+cd best_submission
+python main_causalrag.py
+```
+*(Please refer to `best_submission/README.md` for specific hardware and parameter details).*
+
+### Running Other Experiments
+
+To run any other exploratory script, navigate to the `exp/` directory or run from the root:
 ```bash
 python exp/exp40_full_sota.py
 ```
