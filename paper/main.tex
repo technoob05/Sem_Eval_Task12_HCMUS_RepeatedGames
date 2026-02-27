@@ -97,7 +97,7 @@ Our system employs a retrieval-augmented architecture with a discriminative clas
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=\textwidth,height=0.35\textheight,keepaspectratio]{figures/Pipeline.pdf}
+\includegraphics[width=\textwidth,height=0.25\textheight,keepaspectratio]{figures/Pipeline.pdf}
 \caption{\textbf{Overview of the CausalRAG Architecture.} The system consists of two main stages: (1) A \textit{Retrieval System} that enhances standard hybrid search (BM25 + Dense) with domain-specific causal graph extraction to boost causally relevant evidence. (2) A \textit{Reasoning System} based on Qwen2.5-32B fine-tuned with Extended LoRA, which processes the retrieved context to predict the most plausible causes via a multi-label classification head.}
 \label{fig:system}
 \end{figure*}
@@ -172,12 +172,7 @@ Qwen-32B + QLoRA & 0.89 & +0.01 \\
 \label{tab:dev_results}
 \end{table}
 
-\begin{figure}[t]
-\centering
-\includegraphics[width=\columnwidth]{figures/ablation_waterfall.pdf}
-\caption{Waterfall chart showing the cumulative contribution of each component to the final Development score of 0.9363.}
-\label{fig:ablation}
-\end{figure}
+
 
 \subsection{Official Test Set Results}
 
@@ -229,14 +224,7 @@ Table~\ref{tab:leaderboard} presents the final official competition leaderboard.
 
 \subsection{Analysis: The Importance of Model Scale}
 
-\begin{figure}[t]
-    \centering
-    \includegraphics[width=0.95\columnwidth]{figures/model_scaling.pdf}
-    \caption{Impact of model scaling on AER test performance. Red arrows show incremental gains: +0.23 from DeBERTa to 7B, +0.04 from 7B to 32B. Annotations indicate the fine-tuning approach used. Total improvement: +0.27.}
-    \label{fig:scaling}
-\end{figure}
-
-Figure~\ref{fig:scaling} illustrates the dramatic impact of model scaling on this task. Scaling from DeBERTa-v3-large (435M parameters) to Qwen-32B yields a total improvement of 27 points-by far the largest factor in our system's performance.
+Table~\ref{tab:results} and Table~\ref{tab:model_selection} illustrate the dramatic impact of model scaling on this task. Scaling from DeBERTa-v3-large (435M parameters) to Qwen-32B yields a total improvement of 27 points-by far the largest factor in our system's performance.
 
 An important finding is that fine-tuning dominates zero-shot prompting even at large scales. In our experiments, a \textit{fine-tuned} 7B model (0.86) substantially outperforms a \textit{zero-shot} 32B model (0.70) by 16 points. This demonstrates that task-specific adaptation remains essential for abductive reasoning, even when using the largest available models. The complexity of causal inference and the need for evidence-based reasoning appear to exceed what can be accomplished through in-context learning alone.
 
