@@ -4,4 +4,12 @@ __pycache__/
 *.zip
 *_output/
 *.log
-semeval2026-task12-dataset/
+semeval2026-task12-dataset*/
+results/
+exp/
+*.aux
+*.bbl
+*.blg
+*.out
+*.gz
+*.synctex.gz

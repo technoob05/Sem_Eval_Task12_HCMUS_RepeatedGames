@@ -14,8 +14,8 @@ from pathlib import Path
 import numpy as np
 
 # Configuration
-DATA_DIR = Path(r'd:\Work\SemEval 2026 Task 12 - Abductive Event Reasoning\semeval2026-task12-dataset')
-OUTPUT_DIR = Path(r'd:\Work\SemEval 2026 Task 12 - Abductive Event Reasoning\paper\figures')
+DATA_DIR = Path(r'd:\Focus\SemEval 2026 Task 12 - Abductive Event Reasoning\semeval2026-task12-dataset')
+OUTPUT_DIR = Path(r'd:\Focus\SemEval 2026 Task 12 - Abductive Event Reasoning\paper\figures')
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 # Set style for publication
@@ -165,6 +165,7 @@ for bar, score in zip(bars, scores):
 
 ax.set_ylabel('AER Score')
 ax.set_ylim(0.5, 1.0)
+ax.set_yticks([0.5, 0.6, 0.7, 0.8, 0.9, 1.0])
 ax.set_title('Impact of Model Scaling', fontsize=12, fontweight='bold')
 ax.grid(axis='y', alpha=0.3, linestyle='--')
 ax.spines['top'].set_visible(False)

@@ -1,4 +1,4 @@
-\begin{thebibliography}{14}
+\begin{thebibliography}{19}
 \providecommand{\natexlab}[1]{#1}
 
 \bibitem[{Bhagavatula et~al.(2020)Bhagavatula, Le~Bras, Malaviya, Sakaguchi,
@@ -21,6 +21,20 @@ Jacob Devlin, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova. 2019.
   understanding.
 \newblock In \emph{Proceedings of NAACL-HLT}, pages 4171--4186.
 
+\bibitem[{Gao et~al.(2021)Gao, Yao, and Chen}]{gao2021simcse}
+Tianyu Gao, Xingcheng Yao, and Danqi Chen. 2021.
+\newblock Simcse: Simple contrastive learning of sentence embeddings.
+\newblock In \emph{Proceedings of the 2021 Conference on Empirical Methods in
+  Natural Language Processing}, pages 6894--6910.
+
+\bibitem[{Gururangan et~al.(2020)Gururangan, Marasovi{\'c}, Swayamdipta, Lo,
+  Beltagy, Downey, and Smith}]{gururangan2020dont}
+Suchin Gururangan, Ana Marasovi{\'c}, Swabha Swayamdipta, Kyle Lo, Iz~Beltagy,
+  Doug Downey, and Noah~A Smith. 2020.
+\newblock Don't stop pretraining: Adapt language models to domains and tasks.
+\newblock In \emph{Proceedings of the 58th Annual Meeting of the Association
+  for Computational Linguistics}, pages 8342--8360.
+
 \bibitem[{Guu et~al.(2020)Guu, Lee, Tung, Pasupat, and Chang}]{guu2020realm}
 Kelvin Guu, Kenton Lee, Zora Tung, Panupong Pasupat, and Ming-Wei Chang. 2020.
 \newblock Realm: Retrieval-augmented language model pre-training.
@@ -31,6 +45,14 @@ Kelvin Guu, Kenton Lee, Zora Tung, Panupong Pasupat, and Ming-Wei Chang. 2020.
 Pengcheng He, Xiaodong Liu, Jianfeng Gao, and Weizhu Chen. 2021.
 \newblock Deberta: Decoding-enhanced bert with disentangled attention.
 \newblock \emph{International Conference on Learning Representations}.
+
+\bibitem[{Houlsby et~al.(2019)Houlsby, Giurgiu, Jastrzebski, Morrone,
+  De~Laroussilhe, Gesmundo, Attariyan, and Gelly}]{houlsby2019parameter}
+Neil Houlsby, Andrei Giurgiu, Stanislaw Jastrzebski, Bruna Morrone, Quentin
+  De~Laroussilhe, Andrea Gesmundo, Mona Attariyan, and Sylvain Gelly. 2019.
+\newblock Parameter-efficient transfer learning for nlp.
+\newblock In \emph{International Conference on Machine Learning}, pages
+  2790--2799.
 
 \bibitem[{Hu et~al.(2022)Hu, Shen, Wallis, Allen-Zhu, Li, Wang, Wang, and
   Chen}]{hu2022lora}
@@ -55,9 +77,15 @@ Yinhan Liu, Myle Ott, Naman Goyal, Jingfei Du, Mandar Joshi, Danqi Chen, Omer
 \newblock Roberta: A robustly optimized bert pretraining approach.
 \newblock \emph{arXiv preprint arXiv:1907.11692}.
 
+\bibitem[{Organizers(2026)}]{aer2026task}
+SemEval-2026 Organizers. 2026.
+\newblock Semeval-2026 task 12: Abductive event reasoning.
+\newblock \url{https://semeval.github.io/SemEval2026/tasks}.
+
 \bibitem[{Peirce(1935)}]{peirce1935collected}
 Charles~Sanders Peirce. 1935.
-\newblock Collected papers of charles sanders peirce.
+\newblock \emph{Collected Papers of Charles Sanders Peirce}.
+\newblock Harvard University Press.
 
 \bibitem[{Rajpurkar et~al.(2016)Rajpurkar, Zhang, Lopyrev, and
   Liang}]{rajpurkar2016squad}
@@ -80,6 +108,15 @@ Stephen Robertson and Hugo Zaragoza. 2009.
 Qwen Team. 2024.
 \newblock Qwen2.5 technical report.
 \newblock \emph{arXiv preprint arXiv:2412.15115}.
+
+\bibitem[{Zhang et~al.(2022)Zhang, Mosbach, Adelani, Hedderich, and
+  Klakow}]{zhang2022mcse}
+Miaoran Zhang, Marius Mosbach, David Adelani, Michael Hedderich, and Dietrich
+  Klakow. 2022.
+\newblock Mcse: Multimodal contrastive learning of sentence embeddings.
+\newblock In \emph{Proceedings of the 2022 Conference of the North American
+  Chapter of the Association for Computational Linguistics: Human Language
+  Technologies}, pages 5959--5969.
 
 \bibitem[{Zhu et~al.(2023)Zhu, Shen, Mosbach, Stephan, and
   Klakow}]{zhu2023weaker}

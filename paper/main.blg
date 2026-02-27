@@ -4,10 +4,6 @@ The top-level auxiliary file: main.aux
 Reallocating 'name_of_file' (item size: 1) to 11 items.
 The style file: acl_natbib.bst
 Reallocating 'name_of_file' (item size: 1) to 7 items.
-Illegal, another \bibstyle command---line 431 of file main.aux
- : \bibstyle
- :          {acl_natbib}
-I'm skipping whatever remains of this command
 Reallocating 'glb_str_end' (item size: 4) to 20 items.
 Reallocating 'glb_str_ptr' (item size: 4) to 20 items.
 Reallocating 'global_strs' (item size: 1) to 4000000 items.
@@ -15,46 +11,44 @@ Reallocating 'singl_function' (item size: 4) to 100 items.
 Reallocating 'singl_function' (item size: 4) to 100 items.
 Reallocating 'wiz_functions' (item size: 4) to 6000 items.
 Database file #1: custom.bib
-Warning--empty journal in peirce1935collected
-You've used 14 entries,
+You've used 19 entries,
             3764 wiz_defined-function locations,
-            806 strings with 8507 characters,
-and the built_in function-call counts, 12112 in all, are:
-= -- 1027
-> -- 688
-< -- 11
-+ -- 283
-- -- 212
-* -- 797
-:= -- 1760
-add.period$ -- 55
-call.type$ -- 14
-change.case$ -- 154
-chr.to.int$ -- 15
-cite$ -- 15
-duplicate$ -- 724
-empty$ -- 786
-format.name$ -- 252
-if$ -- 2610
+            830 strings with 9728 characters,
+and the built_in function-call counts, 16749 in all, are:
+= -- 1446
+> -- 921
+< -- 16
++ -- 379
+- -- 284
+* -- 1089
+:= -- 2400
+add.period$ -- 76
+call.type$ -- 19
+change.case$ -- 210
+chr.to.int$ -- 20
+cite$ -- 19
+duplicate$ -- 1004
+empty$ -- 1105
+format.name$ -- 337
+if$ -- 3641
 int.to.chr$ -- 1
 int.to.str$ -- 2
-missing$ -- 165
-newline$ -- 73
-num.names$ -- 56
-pop$ -- 444
+missing$ -- 224
+newline$ -- 99
+num.names$ -- 76
+pop$ -- 606
 preamble$ -- 1
-purify$ -- 126
+purify$ -- 170
 quote$ -- 0
-skip$ -- 641
+skip$ -- 888
 stack$ -- 0
-substring$ -- 429
-swap$ -- 397
-text.length$ -- 7
+substring$ -- 644
+swap$ -- 560
+text.length$ -- 11
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 126
-warning$ -- 1
-while$ -- 62
+type$ -- 168
+warning$ -- 0
+while$ -- 89
 width$ -- 0
-write$ -- 178
-(There was 1 error message)
+write$ -- 244

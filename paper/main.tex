@@ -2,7 +2,7 @@
 % Following AAdaM Best Paper Award Format - Complete Version with Appendix
 \documentclass[11pt]{article}
 
-\usepackage[review]{acl}
+\usepackage{acl}
 \usepackage{times}
 \usepackage{latexsym}
 \usepackage[T1]{fontenc}
@@ -21,22 +21,30 @@
 \usepackage{xcolor}
 \usepackage{array}
 
-\title{CausalRAG at SemEval-2026 Task 12: Hybrid Retrieval and Extended LoRA for Abductive Event Reasoning}
+\title{HCMUS\_RepeatedGames at SemEval-2026 Task 12: CausalRAG: Synergizing Causal Graph Retrieval and Extended LoRA for Abductive Reasoning}
 
-\author{Anonymous}
+\author{
+  \textbf{Dao Sy Duy Minh}\textsuperscript{*,1,2} \quad \textbf{Tran Chi Nguyen}\textsuperscript{*,1,2} \quad \textbf{Huynh Trung Kiet}\textsuperscript{*,1,2} \\
+  \textbf{Nguyen Lam Phu Quy}\textsuperscript{1,2} \quad \textbf{Pham Phu Hoa}\textsuperscript{1,2} \\
+  \textsuperscript{1}Faculty of Information Technology, University of Science, Ho Chi Minh, Vietnam \\
+  \textsuperscript{2}Vietnam National University, Ho Chi Minh City, Vietnam \\
+  \texttt{\{23122041, 23122044, 23122039\}@student.hcmus.edu.vn} \\
+  \texttt{\{23122048, 23122030\}@student.hcmus.edu.vn}
+}
 
 \begin{document}
 \maketitle
+\def\thefootnote{*}\footnotetext{These authors contributed equally to this work.}\def\thefootnote{\arabic{footnote}}
 
 \begin{abstract}
-This paper presents our system developed for SemEval-2026 Task 12: Abductive Event Reasoning (AER). The shared task aims at identifying the most plausible cause of a real-world event from multiple-choice options, given retrieved documents as evidence. In this work, we propose using \textbf{hybrid retrieval} that combines BM25 keyword matching with dense semantic search to capture explicit causal keywords. Moreover, we apply \textbf{extended LoRA fine-tuning} that trains both attention and MLP layers of a 32-billion parameter language model with only 0.81\% trainable parameters. For final refinement, we perform \textbf{development set fine-tuning} to leverage validation data before inference. We achieve \textbf{first place} in the shared task: our system achieves a score of \textbf{0.90} on the official test set evaluation, \textbf{ranking first among 19 teams} and representing a \textbf{+0.27} improvement over our baseline.\footnote{Our code: \url{https://github.com/anonymous/causalrag}}
+This paper presents our system developed for SemEval-2026 Task 12: Abductive Event Reasoning (AER). The shared task aims at identifying the most plausible cause of a real-world event from multiple-choice options, given retrieved documents as evidence. In this work, we propose using \textbf{hybrid retrieval} that combines BM25 keyword matching with dense semantic search to capture explicit causal keywords. Moreover, we apply \textbf{extended LoRA fine-tuning} that trains both attention and MLP layers of a 32-billion parameter language model with only 0.81\% trainable parameters. For final refinement, we perform \textbf{development set fine-tuning} to leverage validation data before inference. We achieve \textbf{a tie for fifth place} in the shared task: our system achieves a score of \textbf{0.90} on the official test set evaluation, \textbf{ranking tied for fifth among participating teams} and representing a \textbf{+0.27} improvement over our baseline.\footnote{Our code: \url{https://github.com/technoob05/Sem_Eval_Task12_HCMUS_RepeatedGames}}
 \end{abstract}
 
 \section{Introduction}
 
 Abductive reasoning---the process of inferring the most plausible cause of an observed outcome from incomplete evidence---is fundamental to human cognition \cite{peirce1935collected}. When we observe that ``The stock market crashed,'' we naturally seek explanations: Was it triggered by economic policy changes? A banking crisis? Or perhaps geopolitical tensions? This form of reasoning, while intuitive for humans, remains challenging for artificial intelligence systems \cite{bhagavatula2020abductive}.
 
-In stark contrast to the extensive research on natural language inference \cite{devlin2019bert,liu2019roberta} and question answering \cite{rajpurkar2016squad}, exploration of abductive reasoning in the context of real-world events lags behind, mainly due to the lack of large-scale datasets. To close this gap, SemEval-2026 Task 12: Abductive Event Reasoning (AER) is proposed to encourage research on causal reasoning with document evidence. The task presents a realistic scenario: given an event and retrieved documents as background, systems must identify which of four candidate explanations most plausibly caused the event.
+In stark contrast to the extensive research on natural language inference \cite{devlin2019bert,liu2019roberta} and question answering \cite{rajpurkar2016squad}, exploration of abductive reasoning in the context of real-world events lags behind, mainly due to the lack of large-scale datasets. To close this gap, SemEval-2026 Task 12: Abductive Event Reasoning (AER) is proposed \cite{aer2026task} to encourage research on causal reasoning with document evidence. The task presents a realistic scenario: given an event and retrieved documents as background, systems must identify which of four candidate explanations most plausibly caused the event.
 
 In this paper, we present our system \textbf{CausalRAG} developed for the AER task. Our system adopts a retrieval-augmented generation (RAG) architecture \cite{lewis2020rag} with a classification head on top of a large language model. The core insight driving our approach is that abductive reasoning requires both \textit{explicit causal knowledge} captured through keyword matching and \textit{implicit semantic understanding} learned through large-scale pre-training. As the provided training data is relatively limited (1,819 instances), we focus on maximizing the utility of a 32-billion parameter model through parameter-efficient fine-tuning with extended LoRA \cite{hu2022lora,dettmers2023qlora}.
 
@@ -168,12 +176,12 @@ We observe that causal reasoning requires both \textit{explicit keyword matching
 \begin{equation}
     s_{\text{hybrid}} = \alpha \cdot \hat{s}_{\text{BM25}} + (1-\alpha) \cdot \hat{s}_{\text{dense}}
 \end{equation}
-where $\hat{s}$ denotes normalized scores and $\alpha = 0.3$ in our experiments. BM25 \cite{robertson2009probabilistic} provides fast lexical matching that captures explicit causal keywords, while dense retrieval using Sentence-BERT \cite{reimers2019sentence} captures semantic similarity beyond lexical overlap. Documents are chunked into segments of approximately 300 characters with 50-character overlap, and we retrieve the top-$k$ chunks (with $k=3$).
+where $\hat{s}$ denotes normalized scores and $\alpha = 0.3$ in our experiments. BM25 \cite{robertson2009probabilistic} provides fast lexical matching that captures explicit causal keywords, while dense retrieval using Sentence-BERT \cite{reimers2019sentence,gao2021simcse,zhang2022mcse} captures semantic similarity beyond lexical overlap. Documents are chunked into segments of approximately 300 characters with 50-character overlap, and we retrieve the top-$k$ chunks (with $k=3$).
 
 \subsection{Extended LoRA Fine-tuning}
 \label{sec:lora}
 
-We fine-tune Qwen2.5-32B-Instruct \cite{qwen2024} using QLoRA \cite{dettmers2023qlora} with 4-bit quantization. Standard LoRA \cite{hu2022lora} adapts pre-trained models by adding low-rank decomposition matrices to the attention layers while keeping the original weights frozen. This approach dramatically reduces the number of trainable parameters while maintaining competitive performance.
+We fine-tune Qwen2.5-32B-Instruct \cite{qwen2024} using QLoRA \cite{dettmers2023qlora} with 4-bit quantization. Standard LoRA \cite{hu2022lora} and adapters \cite{houlsby2019parameter} adapt pre-trained models by adding low-rank decomposition matrices to the attention layers while keeping the original weights frozen. This approach dramatically reduces the number of trainable parameters while maintaining competitive performance.
 
 In our experiments, we extend the standard LoRA configuration to include not only the attention projection layers but also the MLP layers. Specifically, we target seven modules in total: the attention projections (\texttt{q\_proj}, \texttt{k\_proj}, \texttt{v\_proj}, \texttt{o\_proj}) and the feedforward projections (\texttt{gate\_proj}, \texttt{up\_proj}, \texttt{down\_proj}). This results in 268 million trainable parameters, representing only 0.81\% of the total 33 billion parameters. We hypothesize that for tasks requiring complex reasoning, the MLP layers play a crucial role in transforming and combining information.
 
@@ -182,7 +190,7 @@ The classification head consists of a two-layer MLP with GELU activation and dro
 \subsection{Development Set Fine-tuning}
 \label{sec:training}
 
-After training on the training set for 2 epochs with gradient accumulation of 32, we select the checkpoint with the highest validation score. However, we observe that the 400 development instances contain valuable signal that is otherwise ``wasted'' during model selection. To leverage this data, we perform one additional epoch of training on the development set with a halved learning rate ($5 \times 10^{-5}$ instead of $10^{-4}$). This technique is motivated by the two-phase training scheme proposed by \citet{zhu2023weaker}, where training on noisy data first followed by clean data improves performance.
+After training on the training set for 2 epochs with gradient accumulation of 32, we select the checkpoint with the highest validation score. However, we observe that the 400 development instances contain valuable signal that is otherwise ``wasted'' during model selection. To leverage this data, we perform one additional epoch of training on the development set with a halved learning rate ($5 \times 10^{-5}$ instead of $10^{-4}$). This technique is motivated by the two-phase training scheme proposed by \citet{zhu2023weaker} and domain adaptation principles \cite{gururangan2020dont}, where training on noisy data first followed by clean data improves performance.
 
 \section{Experimental Setup}
 
@@ -253,7 +261,7 @@ The DeBERTa baseline establishes a starting point of 0.63. Scaling to Qwen2.5-7B
 
 \subsection{Official Leaderboard Comparison}
 
-Table~\ref{tab:leaderboard} presents the official competition leaderboard at the time of submission. Our system (HCMUS\_TheFangs) ranks \textbf{first} among all 19 participating teams, achieving the highest score of 0.90.
+Table~\ref{tab:leaderboard} presents the final official competition leaderboard. Our system (team name: \textit{WinnerHere} / HCMUS\_RepeatedGames) achieved a high score of 0.90, ranking \textbf{tied for fifth} among all participating teams.
 
 \begin{table}[t]
 \centering
@@ -262,21 +270,16 @@ Table~\ref{tab:leaderboard} presents the official competition leaderboard at the
 \toprule
 \textbf{Rank} & \textbf{Team} & \textbf{Score} \\
 \midrule
-\textbf{1} & \textbf{HCMUS\_TheFangs (Ours)} & \textbf{0.90} \\
-2 & zayme & 0.89 \\
-3 & songohan & 0.88 \\
-4 & Winner Here & 0.88 \\
-5 & dmig\_rorofan & 0.84 \\
-6 & uit\_nkn & 0.82 \\
-7 & baotuan & 0.82 \\
-8 & chisboizhoigay & 0.78 \\
-9 & dorriiii & 0.74 \\
-10 & wuhjie & 0.71 \\
-\midrule
-\multicolumn{3}{l}{\textit{... 9 more teams (0.70--0.30)}} \\
+\textbf{1} & \textbf{nickaraf} & \textbf{0.95} \\
+2 & zayme & 0.94 \\
+3 & ytachioka & 0.91 \\
+3 & pamekalws & 0.91 \\
+5 & essiez & 0.90 \\
+5 & \textbf{HCMUS\_RepeatedGames (Ours)} & \textbf{0.90} \\
+7 & yterao & 0.89 \\
 \bottomrule
 \end{tabular}
-\caption{Official leaderboard (top 10 of 19 teams). Our system achieves the highest score.}
+\caption{Official final leaderboard of the top participating teams. Our system achieves a score of 0.90, placing us in a tie for 5th overall.}
 \label{tab:leaderboard}
 \end{table}
 
@@ -310,7 +313,7 @@ Our system requires substantial computational resources that may not be accessib
 We thank the SemEval-2026 Task 12 organizers for providing the dataset and evaluation infrastructure.
 
 \bibliography{custom}
-\bibliographystyle{acl_natbib}
+% \bibliographystyle{acl_natbib}
 
 \appendix
 
