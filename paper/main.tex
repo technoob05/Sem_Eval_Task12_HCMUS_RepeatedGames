@@ -42,7 +42,7 @@ This paper presents our system developed for SemEval-2026 Task 12: Abductive Eve
 
 \section{Introduction}
 
-Abductive reasoning---the process of inferring the most plausible cause of an observed outcome from incomplete evidence---is fundamental to human cognition \cite{peirce1935collected}. When we observe that ``The stock market crashed,'' we naturally seek explanations: Was it triggered by economic policy changes? A banking crisis? Or perhaps geopolitical tensions? This form of reasoning, while intuitive for humans, remains challenging for artificial intelligence systems \cite{bhagavatula2020abductive}.
+Abductive reasoning-the process of inferring the most plausible cause of an observed outcome from incomplete evidence-is fundamental to human cognition \cite{peirce1935collected}. When we observe that ``The stock market crashed,'' we naturally seek explanations: Was it triggered by economic policy changes? A banking crisis? Or perhaps geopolitical tensions? This form of reasoning, while intuitive for humans, remains challenging for artificial intelligence systems \cite{bhagavatula2020abductive}.
 
 In stark contrast to the extensive research on natural language inference \cite{devlin2019bert,liu2019roberta} and question answering \cite{rajpurkar2016squad}, exploration of abductive reasoning in the context of real-world events lags behind, mainly due to the lack of large-scale datasets. To close this gap, SemEval-2026 Task 12: Abductive Event Reasoning (AER) is proposed \cite{aer2026task} to encourage research on causal reasoning with document evidence. The task presents a realistic scenario: given an event and retrieved documents as background, systems must identify which of four candidate explanations most plausibly caused the event.
 
@@ -62,7 +62,7 @@ The AER dataset is designed to evaluate abductive reasoning over real-world even
     \label{fig:data_dist}
 \end{figure}
 
-As shown in Figure~\ref{fig:data_dist}, the dataset is partitioned into training (1,819 instances, 64\%), development (400 instances, 14\%), and test (612 instances, 22\%) splits. The instances are organized around 36 distinct topics in training, 8 in development, and 12 in testing, spanning domains such as politics, finance, and public emergencies. Each topic is associated with approximately 10 retrieved documents, providing background context for the events.
+As shown in Figure~\ref{fig:data_dist}, the dataset is partitioned into training (1,819 instances, 64\%), development (400 instances, 14\%), and test (612 instances, 22\%) splits. The instances are organized around 36 distinct topics in training, 8 in development, and 12 in testing, spanning domains such as politics, finance, and public emergencies. Each topic is associated with approximately 10 retrieved documents, providing background context for the events. All dataset instances, options, and retrieved documents are exclusively in English.
 
 \begin{table}[t]
 \centering
@@ -97,63 +97,7 @@ Our system employs a retrieval-augmented architecture with a discriminative clas
 
 \begin{figure*}[t]
 \centering
-\resizebox{0.95\textwidth}{!}{
-\begin{tikzpicture}[
-    node distance=1cm and 1cm,
-    font=\small\sffamily,
-    block/.style={rectangle, draw=gray!80, fill=white, text width=2.2cm, text centered, minimum height=1.0cm, rounded corners=2pt, line width=0.8pt},
-    process/.style={rectangle, draw=blue!70!black, fill=blue!5, text width=2.5cm, text centered, minimum height=1.0cm, rounded corners=2pt, line width=0.8pt},
-    model/.style={rectangle, draw=purple!70!black, fill=purple!5, text width=2.8cm, text centered, minimum height=1.2cm, rounded corners=2pt, line width=1pt},
-    arrow/.style={->, >=stealth, thick, color=gray!70!black},
-    group/.style={rectangle, draw=gray!40, dashed, inner sep=0.4cm, rounded corners=5pt, fill=gray!5}
-]
-
-% === INPUTS ===
-\node[block, fill=gray!10] (docs) {\textbf{Retrieved}\\Documents};
-\node[block, below=1.5cm of docs, fill=gray!10] (query) {\textbf{Input}\\Event + Options};
-
-% === RETRIEVAL MODULE ===
-\node[process, right=1.5cm of docs] (graph) {Causal Graph\\Extraction};
-\node[process, right=1.5cm of query] (search) {Hybrid Retrieval\\(BM25 + Dense)};
-
-% === FUSION ===
-\node[process, right=2cm of search, yshift=1.25cm, text width=2.2cm] (fusion) {Evidence\\Ranking \& Selection};
-
-% === GENERATION MODULE ===
-\node[model, right=1.5cm of fusion] (llm) {\textbf{Qwen2.5-32B}\\\textit{Extended LoRA}};
-\node[process, right=1.2cm of llm, text width=2cm] (head) {Multi-Label\\Classifier};
-\node[block, right=1.2cm of head, fill=green!10, text width=1.5cm] (output) {\textbf{Answer}\\Predictions};
-
-% === GROUPS ===
-\begin{pgfonlayer}{background}
-    \node[group, fit=(graph) (search) (fusion), label={[anchor=north west, color=gray!80, font=\scriptsize\bfseries]north west:Retrieval System}] (retrieval_group) {};
-    \node[group, fit=(llm) (head), label={[anchor=north west, color=gray!80, font=\scriptsize\bfseries]north west:Reasoning System}] (reasoning_group) {};
-\end{pgfonlayer}
-
-% === CONNECTIONS ===
-% Docs Flow
-\draw[arrow] (docs) -- node[above, font=\scriptsize, color=gray] {Topic Context} (graph);
-\draw[arrow] (graph) -| node[above, pos=0.2, font=\scriptsize, color=red!70!black] {+Causal Boost} (fusion);
-
-% Query Flow
-\draw[arrow] (query) -- (search);
-\draw[arrow] (search) -| (fusion);
-
-% Fusion to Model
-\draw[arrow] (fusion) -- node[above, font=\scriptsize] {Top-3 Chunks} (llm);
-
-% Model predictions
-\draw[arrow] (llm) -- node[above, font=\scriptsize, text width=1.5cm, align=center] {Hidden\\States} (head);
-\draw[arrow] (head) -- (output);
-
-% Additional annotations
-\node[above=0.1cm of search, font=\scriptsize, color=gray] {$\alpha$=0.3 (BM25)};
-\node[below=0.1cm of search, font=\scriptsize, color=gray] {Score Fusion};
-
-\node[below=0.1cm of llm, font=\scriptsize, color=purple!70!black] {7 Modules (0.81\% Params)};
-
-\end{tikzpicture}
-}
+\includegraphics[width=0.95\textwidth]{figures/causalrag_pipeline.png}
 \caption{\textbf{Overview of the CausalRAG Architecture.} The system consists of two main stages: (1) A \textit{Retrieval System} that enhances standard hybrid search (BM25 + Dense) with domain-specific causal graph extraction to boost causally relevant evidence. (2) A \textit{Reasoning System} based on Qwen2.5-32B fine-tuned with Extended LoRA, which processes the retrieved context to predict the most plausible causes via a multi-label classification head.}
 \label{fig:system}
 \end{figure*}
@@ -292,7 +236,7 @@ Table~\ref{tab:leaderboard} presents the final official competition leaderboard.
     \label{fig:scaling}
 \end{figure}
 
-Figure~\ref{fig:scaling} illustrates the dramatic impact of model scaling on this task. Scaling from DeBERTa-v3-large (435M parameters) to Qwen-32B yields a total improvement of 27 points---by far the largest factor in our system's performance.
+Figure~\ref{fig:scaling} illustrates the dramatic impact of model scaling on this task. Scaling from DeBERTa-v3-large (435M parameters) to Qwen-32B yields a total improvement of 27 points-by far the largest factor in our system's performance.
 
 An important finding is that fine-tuning dominates zero-shot prompting even at large scales. In our experiments, a \textit{fine-tuned} 7B model (0.86) substantially outperforms a \textit{zero-shot} 32B model (0.70) by 16 points. This demonstrates that task-specific adaptation remains essential for abductive reasoning, even when using the largest available models. The complexity of causal inference and the need for evidence-based reasoning appear to exceed what can be accomplished through in-context learning alone.
 
