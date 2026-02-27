@@ -97,63 +97,7 @@ Our system employs a retrieval-augmented architecture with a discriminative clas
 
 \begin{figure*}[t]
 \centering
-\resizebox{\textwidth}{!}{
-\begin{tikzpicture}[
-    node distance=1.5cm and 2cm,
-    font=\small\sffamily,
-    block/.style={rectangle, draw=gray!60, fill=white, text width=2.2cm, text centered, minimum height=1.2cm, rounded corners=4pt, line width=1pt, drop shadow={opacity=0.1, shadow xshift=1pt, shadow yshift=-1pt}},
-    process/.style={rectangle, draw=blue!60!black, fill=blue!5, text width=2.5cm, text centered, minimum height=1.2cm, rounded corners=4pt, line width=1pt, drop shadow={opacity=0.1, shadow xshift=1pt, shadow yshift=-1pt}},
-    model/.style={rectangle, draw=purple!60!black, fill=purple!5, text width=2.8cm, text centered, minimum height=1.4cm, rounded corners=4pt, line width=1.2pt, drop shadow={opacity=0.15, shadow xshift=1pt, shadow yshift=-1pt}},
-    arrow/.style={->, >=stealth, thick, color=gray!70!black},
-    group/.style={rectangle, draw=gray!40, dashed, inner sep=0.4cm, rounded corners=6pt, fill=white}
-]
-
-% === INPUTS ===
-\node[block] (docs) {\textbf{Retrieved}\\Documents};
-\node[block, below=1.2cm of docs] (query) {\textbf{Input}\\Event + Options};
-
-% === RETRIEVAL MODULE ===
-\node[process, right=1.5cm of docs] (graph) {Causal Graph\\Extraction};
-\node[process, right=1.5cm of query] (search) {Hybrid Retrieval\\(BM25 + Dense)};
-
-% === FUSION ===
-\node[process, right=2cm of search, yshift=1.2cm, text width=2.2cm] (fusion) {Evidence\\Ranking \& Selection};
-
-% === GENERATION MODULE ===
-\node[model, right=2cm of fusion] (llm) {\textbf{Qwen2.5-32B}\\\textit{Extended LoRA}};
-\node[process, right=1.2cm of llm, text width=2cm] (head) {Multi-Label\\Classifier};
-\node[block, right=1.2cm of head, fill=green!5, draw=green!60!black] (output) {\textbf{Answer}\\Predictions};
-
-% === GROUPS ===
-\begin{pgfonlayer}{background}
-    \node[group, fill=gray!5, fit=(graph) (search) (fusion), label={[anchor=north west, color=gray!80!black, font=\scriptsize\bfseries]north west:Retrieval System}] (retrieval_group) {};
-    \node[group, fill=gray!5, fit=(llm) (head), label={[anchor=north west, color=gray!80!black, font=\scriptsize\bfseries]north west:Reasoning System}] (reasoning_group) {};
-\end{pgfonlayer}
-
-% === CONNECTIONS ===
-% Docs Flow
-\draw[arrow] (docs) -- node[above, font=\scriptsize, color=gray!80!black] {Context} (graph);
-\draw[arrow] (graph) -| node[pos=0.25, above, font=\scriptsize, color=red!70!black] {+Causal Boost} (fusion);
-
-% Query Flow
-\draw[arrow] (query) -- (search);
-\draw[arrow] (search) -| (fusion);
-
-% Fusion to Model
-\draw[arrow] (fusion) -- node[above, font=\scriptsize, text width=1.5cm, align=center] {Top-3\\Chunks} (llm);
-
-% Model predictions
-\draw[arrow] (llm) -- node[above, font=\scriptsize, text width=1.5cm, align=center] {Hidden\\States} (head);
-\draw[arrow] (head) -- (output);
-
-% Additional annotations
-\node[above=0.1cm of search, font=\scriptsize, color=gray!80!black] {$\alpha$=0.3 (BM25)};
-\node[below=0.1cm of search, font=\scriptsize, color=gray!80!black] {Score Fusion};
-
-\node[below=0.1cm of llm, font=\scriptsize, color=purple!70!black] {7 Modules (0.81\% Params)};
-
-\end{tikzpicture}
-}
+\includegraphics[width=\textwidth,height=0.35\textheight,keepaspectratio]{figures/Pipeline.pdf}
 \caption{\textbf{Overview of the CausalRAG Architecture.} The system consists of two main stages: (1) A \textit{Retrieval System} that enhances standard hybrid search (BM25 + Dense) with domain-specific causal graph extraction to boost causally relevant evidence. (2) A \textit{Reasoning System} based on Qwen2.5-32B fine-tuned with Extended LoRA, which processes the retrieved context to predict the most plausible causes via a multi-label classification head.}
 \label{fig:system}
 \end{figure*}
